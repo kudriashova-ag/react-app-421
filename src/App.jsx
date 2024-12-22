@@ -1,9 +1,9 @@
 import "./App.css";
+import ToDoList from "./components/todo/ToDoList";
 function App() {
   return (
     <>
-      <h1 className="welcome">Lorem, ipsum.</h1>
-      <p>Lorem ipsum dolor sit amet.</p>
+      <ToDoList />
     </>
   );
 }

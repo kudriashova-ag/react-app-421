@@ -1,3 +1,25 @@
 .welcome{
-  color: dodgerblue
+  color: dodgerblue;
+  text-align: center;
+}
+
+.todo-list{
+  width: 400px;
+  margin: auto;
+}
+
+.filter{
+  margin: 16px 0;
+  text-align: right;
+}
+
+.item{
+  display: flex;
+  align-items: center;
+  margin: 8px 0;
+  gap: 8px;
+}
+
+.item button{
+  margin-left: auto;
 }
