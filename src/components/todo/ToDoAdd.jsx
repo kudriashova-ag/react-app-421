@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 
-const ToDoAdd = () => {
+const ToDoAdd = ({ addTask }) => {
+  const [newTitle, setNewTitle] = useState('');
+
   return (
     <div className="add-item">
-      <input type="text" />
-      <button>Add</button>
+      <input type="text" value={newTitle} onChange={(e) => { setNewTitle(e.target.value) }} />
+      <button onClick={() => addTask(newTitle)}>Add</button>
     </div>
   );
 };
