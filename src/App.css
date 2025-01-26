@@ -23,3 +23,12 @@
 .item button{
   margin-left: auto;
 }
+
+.error{
+  color: red;
+  font-size: 0.8em;
+}
+
+button.active{
+  background-color: greenyellow;
+}

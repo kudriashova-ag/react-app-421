@@ -1,8 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Example = () => {
   const [i, setI] = useState(0);
   const [visibleDiv, setVisibleDiv] = useState(true);
+  const [users, setUsers] = useState(["Tom", "Bob", "Alice"]);
+  
+
+/*   useEffect(() => { 
+    // викликлається кожного разу при оновлені компонента
+    console.log("useEffect");
+  }); */
+
+  /* useEffect(() => {
+    // викликлається один раз при монтуванні компонента
+    console.log("useEffect");
+  }, []); */
+  
+
+  useEffect(() => {
+    // викликлається один раз при монтуванні компонента
+    console.log("useEffect");
+  }, [visibleDiv, i]);
 
   const handleClick = () => {
     setVisibleDiv(!visibleDiv);
@@ -16,7 +34,7 @@ const Example = () => {
     setI(i - 1);
   };
 
-  const [users, setUsers] = useState(["Tom", "Bob", "Alice"]);
+ 
   const addUser = () => {
       setUsers([...users, "John"]);
       
@@ -28,16 +46,15 @@ const Example = () => {
       {users.map((user) => (
         <div key={user}>{user}</div>
       ))}
-    <button onClick={addUser}>Add</button>
-          
+      <button onClick={addUser}>Add users</button>
 
       <hr />
-      <button onClick={handleClick}>Click Me</button>
+      <button onClick={handleClick}>Click Me visibleDiv</button>
       {visibleDiv && <div>Lorem ipsum dolor sit amet.</div>}
 
       <hr />
       <button onClick={increment}>+</button>
-      <span>{i}</span>
+      <span>i: {i}</span>
       <button onClick={decrement}>-</button>
     </div>
   );
