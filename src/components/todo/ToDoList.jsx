@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import ToDoAdd from "./ToDoAdd";
 import ToDoFilter from "./ToDoFilter";
 import ToDoItem from "./ToDoItem";
 import list from "./data";
+import { toDoReducer } from "./toDoReducer";
 // import test from  "../../images/1.png";
 
 const filterMap = {
@@ -13,12 +14,16 @@ const filterMap = {
 };
 
 const ToDoList = () => {
-  const [tasks, setTasks] = useState(list);
+  const [tasks, dispatch] = useReducer(toDoReducer, list);
+
   const [filter, setFilter] = useState("All");
 
   useEffect(() => {
     const data = localStorage.getItem("tasks");
-    setTasks(data ? JSON.parse(data) : list);
+    dispatch({
+      type: "SET_TASKS",
+      payload: data ? JSON.parse(data) : list
+    });
     const filterData = localStorage.getItem("filter");
     setFilter(filterData ? filterData : "All");
   }, []);
@@ -32,35 +37,34 @@ const ToDoList = () => {
   }, [filter]);
 
   const addTask = (title) => {
-    setTasks([
-      ...tasks,
-      { id: new Date().getTime(), title: title, done: false },
-    ]);
+    dispatch({
+      type: "ADD_TASK",
+      payload: title,
+    });
   };
 
   const deleteTask = (id) => {
-    const newTasks = tasks.filter((item) => item.id !== id);
-    setTasks(newTasks);
+    dispatch({
+      type: "REMOVE_TASK",
+      payload: id,
+    });
   };
 
   const changeDone = (id) => {
-    const newTasks = tasks.map((task) => {
-      if (task.id === id) {
-        return { ...task, done: !task.done };
-      }
-      return task;
+    dispatch({
+      type: "CHANGE_DONE",
+      payload: id,
     });
-    setTasks(newTasks);
   };
 
   const changeTitle = (id, title) => {
-    const newTasks = tasks.map((task) => {
-      if (task.id === id) {
-        return { ...task, title: title }; // зміна назви
-      }
-      return task;
+    dispatch({
+      type: "CHANGE_TITLE",
+      payload: {
+        id,
+        title,
+      },
     });
-    setTasks(newTasks);
   };
 
   return (
