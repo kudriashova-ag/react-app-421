@@ -5,9 +5,9 @@ import ToDoList from "./components/todo/ToDoList";
 function App() {
   return (
     <>
-      {/* <ToDoList /> */}
+      <ToDoList />
       {/* <Example /> */}
-      <Counters />
+      {/* <Counters /> */}
     </>
   );
 }
