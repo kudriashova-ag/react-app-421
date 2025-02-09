@@ -4,6 +4,7 @@ const render = {
   count1: 0,
   count2: 0,
 };
+
 const Count = ({ value, id, foo}) => {
   console.log(`Counter ${id} render: ${++render[`count${id}`]}`);
 
