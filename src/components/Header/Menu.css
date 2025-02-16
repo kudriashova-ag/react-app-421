@@ -1,0 +1,31 @@
+header{
+  background: #cdcdcd;  
+  display: flex;
+  justify-content: center;
+  color: #000;
+}
+
+header.theme-dark{
+  background: #000000;
+  color: #fff;
+}
+
+.main-menu{
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.main-menu a{
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+    padding: 10px 20px;
+}
+
+
+.main-menu a.active{
+    color: dodgerblue
+}
