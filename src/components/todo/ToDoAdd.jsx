@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
 const ToDoAdd = ({ addTask }) => {
+  console.log("ToDoAdd render");
+  
   const [newTitle, setNewTitle] = useState('');
   const [error, setError] = useState(false);
 
@@ -29,4 +31,4 @@ const ToDoAdd = ({ addTask }) => {
   );
 };
 
-export default ToDoAdd;
+export default React.memo(ToDoAdd);

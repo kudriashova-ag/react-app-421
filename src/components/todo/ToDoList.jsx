@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useCallback, useEffect, useReducer, useState } from "react";
 import ToDoAdd from "./ToDoAdd";
 import ToDoFilter from "./ToDoFilter";
 import ToDoItem from "./ToDoItem";
@@ -14,6 +14,8 @@ const filterMap = {
 };
 
 const ToDoList = () => {
+  console.log(`ToDoList render`);
+
   const [tasks, dispatch] = useReducer(toDoReducer, list);
 
   const [filter, setFilter] = useState("All");
@@ -22,7 +24,7 @@ const ToDoList = () => {
     const data = localStorage.getItem("tasks");
     dispatch({
       type: "SET_TASKS",
-      payload: data ? JSON.parse(data) : list
+      payload: data ? JSON.parse(data) : list,
     });
     const filterData = localStorage.getItem("filter");
     setFilter(filterData ? filterData : "All");
@@ -36,28 +38,28 @@ const ToDoList = () => {
     localStorage.setItem("filter", filter);
   }, [filter]);
 
-  const addTask = (title) => {
+  const addTask = useCallback((title) => {
     dispatch({
       type: "ADD_TASK",
       payload: title,
     });
-  };
+  }, []);
 
-  const deleteTask = (id) => {
+  const deleteTask = useCallback((id) => {
     dispatch({
       type: "REMOVE_TASK",
       payload: id,
     });
-  };
+  },[])
 
-  const changeDone = (id) => {
+  const changeDone = useCallback((id) => {
     dispatch({
       type: "CHANGE_DONE",
       payload: id,
     });
-  };
+  }, []);
 
-  const changeTitle = (id, title) => {
+  const changeTitle = useCallback((id, title) => {
     dispatch({
       type: "CHANGE_TITLE",
       payload: {
@@ -65,20 +67,19 @@ const ToDoList = () => {
         title,
       },
     });
-  };
+  },[])
 
   return (
     <div>
       <h1 className="welcome">ToDo List</h1>
 
-      {/* <img src={test} alt="test" /> */}
-
       <div className="todo-list">
         <ToDoAdd addTask={addTask} />
+
         <ToDoFilter
           filter={filter}
-          setFilter={setFilter}
           filterMap={filterMap}
+          setFilter={setFilter}
         />
         <div className="list">
           {tasks.filter(filterMap[filter]).map((item) => (

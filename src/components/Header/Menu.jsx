@@ -8,6 +8,8 @@ const Menu = () => {
       <NavLink to="/example">Example</NavLink>
       <NavLink to="/todo">ToDo</NavLink>
       <NavLink to="/users">Users</NavLink>
+      <NavLink to="/first">First</NavLink>
+      <NavLink to="/second">Second</NavLink>
     </nav>
   );
 };

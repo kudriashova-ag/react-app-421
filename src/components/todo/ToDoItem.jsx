@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
 const ToDoItem = ({ task, deleteTask, changeDone, changeTitle }) => {
+  console.log(`ToDoItem render`);
+  
   const [isEditing, setIsEditing] = useState(false);
   const [newTitle, setNewTitle] = useState(task.title);
 
@@ -40,4 +42,4 @@ const ToDoItem = ({ task, deleteTask, changeDone, changeTitle }) => {
   return isEditing ? editTemplate : normalTemplate;
 };
 
-export default ToDoItem;
+export default React.memo(ToDoItem);

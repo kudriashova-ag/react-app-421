@@ -1,6 +1,8 @@
 import React from 'react';
 
 const ToDoFilter = ({ filter, setFilter, filterMap }) => {
+  console.log(`ToDoFilter render`);
+  
   const filterKeys = Object.keys(filterMap);
   // console.log(filterKeys);
   
@@ -12,4 +14,4 @@ const ToDoFilter = ({ filter, setFilter, filterMap }) => {
   );
 };
 
-export default ToDoFilter;
+export default React.memo(ToDoFilter);
