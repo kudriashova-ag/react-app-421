@@ -1,6 +1,9 @@
+import api from "../../api";
+
 export const toDoReducer = (state, action) => {
     switch (action.type) { 
         case "ADD_TASK":
+            api.post('/tasks', { title: action.payload });
             return [...state, { id: new Date().getTime(), title: action.payload, done: false }];
            
         case "REMOVE_TASK":

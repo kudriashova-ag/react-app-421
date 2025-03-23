@@ -4,6 +4,7 @@ import ToDoFilter from "./ToDoFilter";
 import ToDoItem from "./ToDoItem";
 import list from "./data";
 import { toDoReducer } from "./toDoReducer";
+import api from "../../api";
 // import test from  "../../images/1.png";
 
 const filterMap = {
@@ -14,25 +15,24 @@ const filterMap = {
 };
 
 const ToDoList = () => {
-  console.log(`ToDoList render`);
-
   const [tasks, dispatch] = useReducer(toDoReducer, list);
 
   const [filter, setFilter] = useState("All");
 
   useEffect(() => {
-    const data = localStorage.getItem("tasks");
-    dispatch({
-      type: "SET_TASKS",
-      payload: data ? JSON.parse(data) : list,
-    });
+    getTasks();
     const filterData = localStorage.getItem("filter");
     setFilter(filterData ? filterData : "All");
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  }, [tasks]);
+  const getTasks = async () => { 
+    const response = await api.get("tasks");
+    dispatch({ type: "SET_TASKS", payload: response.data });
+  }
+
+  // useEffect(() => {
+  //   localStorage.setItem("tasks", JSON.stringify(tasks));
+  // }, [tasks]);
 
   useEffect(() => {
     localStorage.setItem("filter", filter);
